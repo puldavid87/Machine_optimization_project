@@ -31,10 +31,7 @@
      
 ## Explore Data in python
 
-```bash
-pip install os pathlib 
 
-```
 
 ```python
 
