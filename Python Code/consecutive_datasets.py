@@ -15,11 +15,9 @@ import os
 import random
 import shutil
 
-train_dir="C:/Users/paur/Documents/Solar_panels/data100/train"
-test_dir="C:/Users/paur/Documents/Solar_panels/data100/test"
-path="C:/Users/paur/Documents/Solar_panels/"         
-
-#labels=["mono_0.0","mono_0.3","mono_0.6","mono_1.0","poly_0.0","poly_0.3","poly_0.6","poly_1.0"]
+train_dir="train_set_path"
+test_dir="test_set_path"
+path="dataset_path/"         
 
 # Nice way to get labels:
 labels=[]
@@ -81,13 +79,15 @@ def fill_images (images, batch_images,train_images, num,number_train,i,batch):
         flag = 0          
     if max_values < total_images:
         fill_images(images, os.listdir(images),train_images, num,number_train,i,batch)
-        
+ 
+#get consecutive subsets:          
 samples=[4,12,20]   
-   
+
+#create folders
 for i in samples:
     create_folders(train_dir,labels,i) 
-
+#first subset
 small_batch(train_dir,labels,samples[0])
-
+#get the rest subsets
 for i in range (len(samples)-1):
     get_images(train_dir,labels,samples[i],samples[i+1])
