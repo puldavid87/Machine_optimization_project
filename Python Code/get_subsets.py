@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Feb  8 10:55:48 2023
 
-@author: paur
+@author: Paul Rosero
 """
 import os
 import random
 import shutil
 
-train_dir="C:/Users/paur/Documents/Solar_panels/data100/train"
-test_dir="C:/Users/paur/Documents/Solar_panels/data100/test"
-path="C:/Users/paur/Documents/Solar_panels/"         
-
-#labels=["mono_0.0","mono_0.3","mono_0.6","mono_1.0","poly_0.0","poly_0.3","poly_0.6","poly_1.0"]
+train_dir="trainset_path"
+test_dir="testset_path"
+path="main_folder_path"         
 
 # Nice way to get labels:
 labels=[]
