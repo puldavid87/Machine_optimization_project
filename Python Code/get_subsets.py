@@ -7,9 +7,9 @@ import os
 import random
 import shutil
 
-train_dir="trainset_path"
-test_dir="testset_path"
-path="main_folder_path"         
+train_dir="trainset_path/"
+test_dir="testset_path/"
+path="main_folder_path/"         
 
 # Nice way to get labels:
 labels=[]
@@ -34,7 +34,7 @@ def create_folders(train_dir,test_dir, labels, num):
 
 
 def copy_images_percentages (train_dir,test_dir, labels, num,):
-  train_dest = path+"/data" + str(num) + "/train"
+  train_dest = path+"data" + str(num) + "/train"
   test_dest = path+"data" + str(num) + "/test"
   for i in labels:
     train_path=train_dest + "/" + i 
