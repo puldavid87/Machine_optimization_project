@@ -11,7 +11,7 @@ import os
 import random
 import shutil
 
-train_dir="C:/Users/paur/Documents/Tomato_leaves_illness_detection/DATASET_1/tomato10/train"
+train_dir="your path"
 
 def view_images(target_dir, target_class, num):
   target_path=target_dir + "/" + target_class
@@ -41,10 +41,13 @@ labels=[
 for i in labels:
   view_images(target_dir=train_dir ,target_class=i,num=3)
 
+  
+# Check one random image 
 random_image = random.sample(os.listdir(train_dir+"/"+"Tomato___Septoria_leaf_spot/"),1)
  # Read in the image and plot it using matplotlib
 img = mpimg.imread(train_dir +"/"+"Tomato___Septoria_leaf_spot/"  + random_image[0])
 print(f"Image shape: {img.shape}")
 
-img = mpimg.imread("C:/Users/paur/Documents/Tomato_leaves_illness_detection/Carlos1.JPEG")
+# check one specific image
+img = mpimg.imread("image_path")
 print(f"Image shape: {img.shape}")
