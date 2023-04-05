@@ -29,17 +29,16 @@
 #check samples insite of the directory/labels
 !ls main_folder/train/Label 1/
      
-
 ## Explore Data in python
 
 ```bash
 pip install os pathlib 
+
 ```
 
 ```python
 
 import os
-
 # Walk through pizza_steak directory and list number of files
 for dirpath, dirnames, filenames in os.walk("main_folder"):
   print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
