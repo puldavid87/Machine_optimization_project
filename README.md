@@ -28,10 +28,14 @@
 
 #check samples insite of the directory/labels
 !ls main_folder/train/Label 1/
-     
+```
+
 ## Explore Data in python
 
+```bash
+pip install os pathlib 
 
+```
 
 ```python
 
