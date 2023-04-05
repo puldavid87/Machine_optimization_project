@@ -31,11 +31,13 @@
      
 
 ## Explore Data in python
+
 ```bash
 pip install os pathlib 
 ```
 
 ```python
+
 import os
 
 # Walk through pizza_steak directory and list number of files
@@ -54,7 +56,7 @@ class_names = np.array(sorted([item.name for item in data_dir.glob('*')])) # cre
 print(class_names)
 
 ```
-z
+
 Datasets:
 
 * BIRDS CLASSIFICATION: 
