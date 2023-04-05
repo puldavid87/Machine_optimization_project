@@ -50,8 +50,10 @@ def copy_images_percentages (train_dir,test_dir, labels, num,):
     for j, img in enumerate(target_images_test):
       shutil.copy(test_dir + "/" + str(i) + "/" + str(img),test_path + "/" + img)
 
-samples=[4]   
-   
+# subsets by selecting the percentage
+samples=[1,10,25,50,75]   
+
+# Get new subsets
 for i in samples:
     create_folders(train_dir,test_dir,labels,i) 
     copy_images_percentages(train_dir,test_dir,labels,i)
