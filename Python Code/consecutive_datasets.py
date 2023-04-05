@@ -4,13 +4,6 @@ Created on Wed Apr  5 15:37:42 2023
 
 @author: paur
 """
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Feb  8 10:55:48 2023
-
-@author: paur
-"""
 import os
 import random
 import shutil
