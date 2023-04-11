@@ -18,6 +18,7 @@ from sklearn import metrics
 import psutil
 import seaborn as sns
 
+path_destination = "/"
 path="C:/Users/paur/Documents/Solar_panels/" 
 test_dir = "C:/Users/paur/Documents/Solar_panels/data100/test" 
 
@@ -128,7 +129,7 @@ def results (model,test_data,dataset,name):
     ax.set_title('Confusion Matrix with labels\n\n');
     ax.set_xlabel('\nPredicted Values')
     ax.set_ylabel('Actual Values ');
-    plt.savefig("cf_matrix_fig"+str(dataset)+".png")
+    plt.savefig(path_destination+"cf_matrix_fig"+str(dataset)+".png")
     ## Display the visualization of the Confusion Matrix.
     plt.show()  
     
@@ -143,7 +144,7 @@ def training_plots(datasets,name):
         plt.xlabel("epoch")
         ax.legend()
         #plt.legend(["train", "validation"], loc="upper left")
-        plt.savefig("val_accuracy" + str(name)+ ".png")
+        plt.savefig(path_destination+"val_accuracy" + str(name)+ ".png")
         plt.show()
         
 
@@ -159,7 +160,7 @@ def training_results_fine (datasets,name):
         ax.legend()
         #plt.legend(["train", "validation"], loc="upper left")
         plt.show()
-        fig.savefig("val_accuracy_fine" + str(name)+ ".png")
+        fig.savefig(path_destination+"val_accuracy_fine" + str(name)+ ".png")
 
 
 
@@ -204,8 +205,8 @@ for j in datasets:
         print("---------------------------------------------------")
         models.append(hist)
         results (model,test_data,j,"test1")
-        model.save("efficient" + "_test1_" + str(j))
-        model.save("efficient_h" + "_test1_"  + str(j) + ".h5")
+        model.save(path_destination+"efficient" + "_test1_" + str(j))
+        model.save(path_destination+"efficient_h" + "_test1_"  + str(j) + ".h5")
 
 
     
@@ -225,7 +226,7 @@ for j in datasets:
                     validation_data=test_data,
                     # Go through less of the validation data so epochs are faster (we want faster experiments!)
                     validation_steps=int(0.25 * len(test_data)),
-                      callbacks=[callback],
+                     # callbacks=[callback],
                     verbose=1 )
             end=datetime.now()
             #end_cpu=psutil.cpu_percent(interval=None)
@@ -254,8 +255,8 @@ for j in datasets:
             print("---------------------------------------------------")
             models.append(hist)
             results (model,test_data,j, "test2")
-            model.save("efficient" + "_test2_" + str(j))
-            model.save("efficient_h" + "_test2_"  + str(j) + ".h5")
+            model.save(path_destination+"efficient" + "_test2_" + str(j))
+            model.save(path_destination+"efficient_h" + "_test2_"  + str(j) + ".h5")
             
             
 training_results_fine(datasets,"test2")
@@ -302,13 +303,17 @@ for j in datasets:
             print("---------------------------------------------------")
             models.append(hist)
             results (model,test_data,j, "test3")
-            model.save("efficient" + "_test3_" + str(j))
-            model.save("efficient_h" + "_test3_"  + str(j) + ".h5")
+            model.save(path_destination+"efficient" + "_test3_" + str(j))
+            model.save(path_destination+"efficient_h" + "_test3_"  + str(j) + ".h5")
             
 training_results_fine(datasets,"test3")
 
 
-df.to_csv("efficient.csv", index=False)
+df.to_csv(path_destination+"efficient.csv", index=False)
+
+
+
+
 
 
 
