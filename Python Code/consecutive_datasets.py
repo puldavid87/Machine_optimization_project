@@ -11,7 +11,7 @@ import shutil
 train_dir="train_set_path"
 test_dir="test_set_path"
 path="dataset_path/"         
-
+folder_name = "data_con"
 # Nice way to get labels:
 labels=[]
 for i in (os.listdir(train_dir)):
@@ -21,7 +21,7 @@ for i in (os.listdir(train_dir)):
 def create_folders(train_dir, labels, num): 
   number_of_samples=len(os.listdir(train_dir))
   print(number_of_samples)
-  path_dest=path+"data"+str(num)
+  path_dest=path+folder_name+str(num)
   os.makedirs(path_dest)
   train_dest=path_dest + "/" + "train"
   os.makedirs(train_dest)
@@ -30,7 +30,7 @@ def create_folders(train_dir, labels, num):
     os.makedirs(label_train_path)
 
 def small_batch(train_dir, labels, num):
-  train_dest = path+"data" + str(num) + "/train"
+  train_dest = path+folder_name + str(num) + "/train"
   for i in labels:
     train_path=train_dest + "/" + i  
     file_names_train = os.listdir(train_dir+"/" + i)
@@ -40,8 +40,8 @@ def small_batch(train_dir, labels, num):
       shutil.copy(train_dir + "/" + str(i) + "/" + str(img),train_path + "/" + img)
 
 def get_images(train_dir, labels,batch,num):
-  train_dest = path+"data" + str(num) + "/train"
-  batch_source = path+"data" + str(batch) + "/train"
+  train_dest = path+folder_name + str(num) + "/train"
+  batch_source = path+folder_name + str(batch) + "/train"
   for i in labels:
     batch_path=batch_source + "/" + i 
     file_names_batch = os.listdir(batch_path)
