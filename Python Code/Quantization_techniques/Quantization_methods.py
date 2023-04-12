@@ -9,7 +9,7 @@ import tensorflow as tf
 import os
 import numpy as np
 import pathlib
-path= "/Users/paur/Documents/Tomato_leaves_illness_detection/DATASET_1"
+path= "path/"
 dataset="tomato500"
 #Define some parameters for the loader:
 batch_size = 32
@@ -22,8 +22,8 @@ test_datagen = ImageDataGenerator()
 
 
 def split_tratin_test_set ():
-    train_dir=path + "/" + dataset + "/" + "train"
-    test_dir=path + "/" + dataset +"/" + "test"
+    train_dir= + dataset + "/" + "train"
+    test_dir= + dataset +"/" + "test"
     # Import data from directories and turn it into batches
     train_data = train_datagen.flow_from_directory(train_dir,
                                                target_size=(img_height, img_width),
@@ -34,25 +34,20 @@ def split_tratin_test_set ():
                                               target_size=(img_height, img_width),
                                               batch_size=batch_size,
                                               class_mode="categorical")    
-    # for image, _ in train_data.take(1):
-    #     plt.figure(figsize=(10, 10))
-    #     first_image = image[0]
-    #     for i in range(9):
-    #         ax = plt.subplot(3, 3, i + 1)
-    #         augmented_image = img_augmentation(tf.expand_dims(first_image, 0))
-    #         plt.imshow(augmented_image[0] / 255)
-    #         plt.axis('off')
     return train_data, test_data
+
+
+
 train_images,test_images=split_tratin_test_set()
-model=tf.keras.models.load_model("mobilenet" + "_" + str(dataset))
+model="model_name"
 
 #INFERENCES#
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 tflite_model = converter.convert()
-tflite_models_dir = pathlib.Path("/Users/paur/Documents/Tomato_leaves_illness_detection/CODES")
+tflite_models_dir = pathlib.Path("Path_to_save_tflite_models")
 tflite_models_dir.mkdir(exist_ok=True, parents=True)
 
-tflite_model_file = tflite_models_dir/"mobilenet_model_100_model.tflite"
+tflite_model_file = tflite_models_dir/"your_model_name.tflite"
 tflite_model_file.write_bytes(tflite_model)
 
 
@@ -62,14 +57,14 @@ converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.target_spec.supported_types = [tf.float16]
 
 tflite_fp16_model = converter.convert()
-tflite_model_fp16_file = tflite_models_dir/"mobilenet_model_100_quant_f16.tflite"
+tflite_model_fp16_file = tflite_models_dir/"your_model_name_quant_f16.tflite"
 tflite_model_fp16_file.write_bytes(tflite_fp16_model)
 
 #Post-training dynamic range quantization
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 tflite_quant_model = converter.convert()
-tflite_model_quant_file = tflite_models_dir/"mobilenet_model_100_quant.tflite"
+tflite_model_quant_file = tflite_models_dir/"your_model_name_quant.tflite"
 tflite_model_quant_file.write_bytes(tflite_quant_model)
 
 #Post-training integer quantization
@@ -84,7 +79,7 @@ converter = tf.lite.TFLiteConverter.from_keras_model(model)
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_data_gen
 tflite_model_quant_float = converter.convert()
-tflite_model_quant_float_file = tflite_models_dir/"mobilenet_model_100_quant_float.tflite"
+tflite_model_quant_float_file = tflite_models_dir/"your_model_name_quant_float.tflite"
 tflite_model_quant_float_file.write_bytes(tflite_model_quant_float)
 
 #Convert using integer-only quantization
@@ -100,7 +95,7 @@ converter.inference_input_type = tf.uint8
 converter.inference_output_type = tf.uint8
 
 tflite_model_quant_int = converter.convert()
-tflite_model_quant_int_file = tflite_models_dir/"mobilenet_model_250_quant_int.tflite"
+tflite_model_quant_int_file = tflite_models_dir/"your_model_name_quant_int.tflite"
 tflite_model_quant_int_file.write_bytes(tflite_model_quant_int)
 
 #Load the model into the interpreters
