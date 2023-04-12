@@ -1,12 +1,12 @@
 Create conda environments without GPUs
 
-´´´ python
+```Python
 conda info --envs
 conda create --name tf python=3.9
 conda activate tf
-´´
+```
 
-´´´ python
+```Python
 pip install tensorflow==2.12.*
 conda deactivate
-´´
+```
