@@ -17,9 +17,9 @@ import pathlib
 from datetime import datetime
 
 
-path_destination = "C:/Users/paur/Documents/Solar_panels/test/"
-path_data_source="C:/Users/paur/Documents/Solar_panels/" 
-test_dir = "C:/Users/paur/Documents/Solar_panels/data100/test" 
+path_destination = "your_path/"
+path_data_source="your_path" 
+test_dir = "your_path/test" 
 
 df=[{'dataset':1, 'epochs':1, 'DA':1, 'layers':1, 'train':1, 'test':1, 'exec.time':1,'ram':1, 'cpu':1}]
 df=pd.DataFrame(data=df)
