@@ -1,32 +1,31 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Apr  7 16:31:51 2023
+Created on Fri Apr 14 17:05:12 2023
 
 @author: paur
 """
-
-#########Libraries##############
-#from keras_flops import get_flops
 import tensorflow as tf
-from datetime import datetime
 from tensorflow.keras.applications import EfficientNetB0
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, accuracy_score,classification_report
 from sklearn import metrics
 import psutil
 import seaborn as sns
+import pandas as pd
+import pathlib
+from datetime import datetime
 
-path_destination = "/"
-path="C:/Users/paur/Documents/Solar_panels/" 
+
+path_destination = "C:/Users/paur/Documents/Solar_panels/test/"
+path_data_source="C:/Users/paur/Documents/Solar_panels/" 
 test_dir = "C:/Users/paur/Documents/Solar_panels/data100/test" 
 
 df=[{'dataset':1, 'epochs':1, 'DA':1, 'layers':1, 'train':1, 'test':1, 'exec.time':1,'ram':1, 'cpu':1}]
 df=pd.DataFrame(data=df)
 datasets=["data1"]#,"data10"]#,"data25","data50","data75","data100"]
 classes=8
-epochs_vector=[3]
+epochs_vector=[1]
 unfreeze_layers=[-20]
 
 #Define some parameters for the loader:
@@ -35,7 +34,7 @@ img_height = 224
 img_width = 224
 
 def split_tratin_test_set (dataset):
-    train_dir=path + dataset +"/" + "train"
+    train_dir=path_data_source + dataset +"/" + "train"
     # Import data from directories and turn it into batches
     train_data = tf.keras.preprocessing.image_dataset_from_directory(train_dir,
                                                                   seed=123,
@@ -123,13 +122,13 @@ def results (model,test_data,dataset,name):
     print(report)
 
     matrix=pd.DataFrame(matrix)
-    matrix.to_csv("cf_matrix" + str(name)+ str(dataset)+ ".csv", index=False)
+    matrix.to_csv(path_destination+"cf_matrix" + str(name)+ str(dataset)+ ".csv", index=False)
     ax = plt.plot()
     ax = sns.heatmap(matrix, annot=True, cmap='Blues')
     ax.set_title('Confusion Matrix with labels\n\n');
     ax.set_xlabel('\nPredicted Values')
     ax.set_ylabel('Actual Values ');
-    plt.savefig(path_destination+"cf_matrix_fig"+str(dataset)+".png")
+    plt.savefig(path_destination+"cf_matrix_fig_efficient_"+str(dataset)+"_"+str(name)+".png")
     ## Display the visualization of the Confusion Matrix.
     plt.show()  
     
@@ -144,7 +143,7 @@ def training_plots(datasets,name):
         plt.xlabel("epoch")
         ax.legend()
         #plt.legend(["train", "validation"], loc="upper left")
-        plt.savefig(path_destination+"val_accuracy" + str(name)+ ".png")
+        plt.savefig(path_destination+"_val_accuracy_efficient" + str(j)+"_" + str(name)+ ".png")
         plt.show()
         
 
@@ -160,11 +159,7 @@ def training_results_fine (datasets,name):
         ax.legend()
         #plt.legend(["train", "validation"], loc="upper left")
         plt.show()
-        fig.savefig(path_destination+"val_accuracy_fine" + str(name)+ ".png")
-
-
-
-        
+        fig.savefig(path_destination+"val_accuracy_fine_efficient_" + str(j)+ ".png")
 
 callback = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=2)
 
@@ -217,7 +212,7 @@ for j in datasets:
     train_data,test_data=split_tratin_test_set(j)
     for i in epochs_vector:
         for l in unfreeze_layers:
-            model = build_model(num_classes=10,aprov_pre=False)
+            model = build_model(num_classes=classes,aprov_pre=False)
             unfreeze_model(model,l)
             start=datetime.now()
             hist= model.fit(train_data,
@@ -310,10 +305,3 @@ training_results_fine(datasets,"test3")
 
 
 df.to_csv(path_destination+"efficient.csv", index=False)
-
-
-
-
-
-
-
