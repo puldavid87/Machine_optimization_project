@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Apr 14 17:05:12 2023
-
 @author: paur
 """
 import tensorflow as tf
-from tensorflow.keras.applications import InceptionV3
+from tensorflow.keras.applications import EfficientNetB0
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, accuracy_score,classification_report
@@ -17,9 +16,9 @@ import pathlib
 from datetime import datetime
 
 
-path_destination = "/home/paur/model/tomato_leaves/inception/"
-path_data_source="/home/paur/model/data/TOMATO/"
-test_dir = "/home/paur/model/data/TOMATO/data100/test/"
+path_destination = "your_path/"
+path_data_source="your_path" 
+test_dir = "your_path/test" 
 
 df=[{'dataset':1, 'epochs':1, 'DA':1, 'layers':1, 'train':1, 'test':1, 'exec.time':1,'ram':1, 'cpu':1}]
 df=pd.DataFrame(data=df)
