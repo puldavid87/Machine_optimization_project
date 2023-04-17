@@ -151,7 +151,7 @@ def training_results_fine (datasets,name):
     fig, ax = plt.subplots()
     for  j in range (len (datasets)):
         ax.plot(models[j].history["val_accuracy"], label=datasets[j])
-        ax.plot([3-1, 3-1],
+        ax.plot([10-1, 10-1],
         plt.ylim(), label='Start Fine Tuning') # reshift plot around epochs
         plt.title("model accuracy")
         plt.ylabel("accuracy")
