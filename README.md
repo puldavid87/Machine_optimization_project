@@ -1,4 +1,4 @@
-# Machine Optimization Project
+# ML Optimization Project
 
 ## Dataset structure:
 
